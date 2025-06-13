@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+</head>
+<body>
+
+  <h2>회원가입</h2>
+
+  <form onsubmit="return checkForm()">
+    <label>아이디 <input type="text" id="id"></label>
+    <button type="button" onclick="checkDuplicate()">중복확인</button>
+    <span id="result"></span><br><br>
+
+    <label>비밀번호 <input type="password" id="pw"></label><br><br>
+    <label>비밀번호 확인 <input type="password" id="pw2"></label><br><br>
+
+    <button type="submit">확인</button>
+    <button type="reset">리셋</button>
+  </form>
+
+  <script>
+    function checkForm() {
+      const id = document.getElementById("id");
+      const pw = document.getElementById("pw");
+      const pw2 = document.getElementById("pw2");
+      if (!id.value || !pw.value || !pw2.value) {
+        alert("모든 값을 입력하세요.");
+        (!id.value ? id : (!pw.value ? pw : pw2)).focus();
+        return false;
+      }
+      if (pw.value !== pw2.value) {
+        alert("비밀번호가 일치하지 않습니다.");
+        pw2.focus();
+        return false;
+      }
+      return true;
+    }
+
+    function checkDuplicate() {
+      const id = document.getElementById("id");
+      const result = document.getElementById("result");
+      if (id.value.trim()) {
+        result.textContent = "사용가능";
+        result.style.color = "blue";
+      } else {
+        alert("아이디를 입력하세요.");
+        id.focus();
+      }
+    }
+  </script>
+
+</body>
+</html>
